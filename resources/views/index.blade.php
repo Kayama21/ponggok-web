@@ -19,16 +19,18 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('assets/css/adminlte.min.css')}}">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="{{'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'}}">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="{{asset('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition dark-mode sidebar-mini">
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__wobble" src="{{asset('assets/img/PonggokLogo.png')}}" alt="AdminLTELogo" height="100" width="100">
-    </div>
+    </div> -->
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark">
@@ -95,7 +97,7 @@
             <img src="{{asset('assets/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
+            <a href="/cpanel/logout" class="d-block">{{ auth()->user()->name }}</a>
           </div>
         </div>
 
@@ -104,16 +106,34 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-            <li class="nav-header">DOCUMENTS</li>
             <li class="nav-item">
-              <a href="pages/calendar.html" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
+              <a href="/dashboard" class="nav-link">
+                <ion-icon name="home"></ion-icon>
                 <p>
-                  List Ajuan
-                  <span class="badge badge-info right">2</span>
+                  Dashboard
                 </p>
               </a>
             </li>
+            <li class="nav-header">DOCUMENTS</li>
+            <li class="nav-item">
+              <a href="/ajuan" class="nav-link">
+                <ion-icon name="mail-unread"></ion-icon>
+                <p>
+                  List Ajuan
+                </p>
+              </a>
+            </li>
+            @if(auth()->user()->role === 'admin')
+            <!-- List kategori -->
+            <li class="nav-item">
+              <a href="/kategori" class="nav-link">
+                <ion-icon name="document"></ion-icon>
+                <p>
+                  List Kategori
+                </p>
+              </a>
+            </li>
+            @endif
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
@@ -149,18 +169,18 @@
   <script src="{{asset('assets/js/adminlte.js')}}"></script>
 
   <!-- DataTables  & Plugins -->
-<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{asset('assets/plugins/jszip/jszip.min.js')}}"></script>
-<script src="{{asset('assets/plugins/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{asset('assets/plugins/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/jszip/jszip.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/pdfmake/pdfmake.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/pdfmake/vfs_fonts.js')}}"></script>
+  <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 
   <!-- PAGE PLUGINS -->
   <!-- jQuery Mapael -->
@@ -170,6 +190,14 @@
   <script src="{{asset('assets/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
   <!-- ChartJS -->
   <script src="{{asset('assets/plugins/chart.js/Chart.min.js')}}"></script>
+  <!-- Ion-Icons -->
+  <script type="module" src="{{'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js'}}"></script>
+  <script nomodule src="{{'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js'}}"></script>
+  <!-- SweetAlert2 -->
+  <script src="{{asset('assets/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+  <!-- jquery-validation -->
+  <script src="{{asset('assets/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/jquery-validation/additional-methods.min.js')}}"></script>
   @yield('script')
 </body>
 

@@ -13,4 +13,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/categories', [App\Http\Controllers\CategoriesController::class, 'index']);
+// Route isi form ajuan
+Route::get('/', [App\Http\Controllers\SuratController::class, 'formRequests']);
+Route::post('/createSurat', [App\Http\Controllers\SuratController::class, 'store']);
+
+// Route Login
+Route::get('/cpanel', [App\Http\Controllers\LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/cpanel/login', [App\Http\Controllers\LoginController::class, 'authenticate']);
+
+Route::middleware(['auth'])
+    ->group(function () {
+
+        Route::get('/dashboard', [App\Http\Controllers\SuratController::class, 'index']);
+        Route::get('/ajuan', [App\Http\Controllers\SuratController::class, 'listAjuan']);
+        Route::get('/ajuan-table', [App\Http\Controllers\SuratController::class, 'tableAjuan']);
+
+        Route::middleware(['role:admin'])->group(function () {
+            Route::get('/ajuan/verifikasi/{id}', [App\Http\Controllers\SuratController::class, 'verifikasi']);
+            Route::post('/ajuan/verified-ajuan', [App\Http\Controllers\SuratController::class, 'verifiedAjuan']);
+            Route::get('/kategori', [App\Http\Controllers\KategoriController::class, 'index']);
+            Route::get('/kategori/page-add', [App\Http\Controllers\KategoriController::class, 'addKategori']);
+            Route::get('/kategori/page-update', [App\Http\Controllers\KategoriController::class, 'updateKategori']);
+            Route::post('/kategori/store', [App\Http\Controllers\KategoriController::class, 'store']);
+            Route::post('/kategori/update', [App\Http\Controllers\KategoriController::class, 'update']);
+            Route::post('/kategori/destroy', [App\Http\Controllers\KategoriController::class, 'destroy']);
+        });
+
+        Route::middleware(['role:lurah'])->group(function () {
+            Route::get('/ajuan/signature/{id}', [App\Http\Controllers\SuratController::class, 'signaturePage']);
+            Route::post('/ajuan/signed-ajuan', [App\Http\Controllers\SuratController::class, 'signedAjuan']);
+        });
+
+        Route::get('/cpanel/logout', [App\Http\Controllers\LoginController::class, 'logout']);
+    });
+
+
+Route::get('/requests-lurah', [App\Http\Controllers\SuratController::class, 'list_ajuan_ttd']);
+Route::get('/requests-table-lurah', [App\Http\Controllers\SuratController::class, 'tableRequestsLurah']);
+
+
+
+
+
+
