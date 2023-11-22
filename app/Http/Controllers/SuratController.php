@@ -87,9 +87,9 @@ class SuratController extends Controller
     public function formRequests()
     {
 
-        $categories = Kategori::all();
+        $kategoris = Kategori::all();
 
-        return view('form', ['categories' => $categories]);
+        return view('form', ['kategoris' => $kategoris]);
     }
 
     // Create ajuan
@@ -101,7 +101,6 @@ class SuratController extends Controller
             'detailAjuan' => 'required',
             'wa' => 'required',
             'email' => 'required',
-            'kategoriSurat' => 'required',
             'ktpPic' => 'required|file|mimes:jpeg,png,pdf|max:2048',
 
         ]);

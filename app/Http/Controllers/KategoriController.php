@@ -18,11 +18,6 @@ class KategoriController extends Controller
         return view('addKategori');
     }
 
-    public function updateKategori() {
-
-        return view('updateKategori');
-    }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -36,14 +31,35 @@ class KategoriController extends Controller
         return redirect('./kategori');
     }
 
+
+    public function updateKategori($id) {
+        $kategoris = Kategori::findorFail($id);
+
+        return view('updateKategori', compact('kategoris'));
+    }
+
+
     public function update(Request $request, $id)
     {
+
+        $kategoris = Kategori::find($id);
+
         $request->validate([
             'kategoriSurat' => 'required',
         ]);
 
-        Kategori::update([
+        $kategoris->update([
             'kategoriSurat' => $request->kategoriSurat,
         ]);
+
+        return redirect('./kategori');
+    }
+
+    public function destroy($id){
+        $kategoris = Kategori::find($id);
+
+        $kategoris->delete();
+        
+        return back();
     }
 }

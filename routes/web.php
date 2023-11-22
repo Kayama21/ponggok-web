@@ -33,10 +33,10 @@ Route::middleware(['auth'])
             Route::post('/ajuan/verified-ajuan', [App\Http\Controllers\SuratController::class, 'verifiedAjuan']);
             Route::get('/kategori', [App\Http\Controllers\KategoriController::class, 'index']);
             Route::get('/kategori/page-add', [App\Http\Controllers\KategoriController::class, 'addKategori']);
-            Route::get('/kategori/page-update', [App\Http\Controllers\KategoriController::class, 'updateKategori']);
+            Route::get('/kategori/page-update/{id}', [App\Http\Controllers\KategoriController::class, 'updateKategori']);
             Route::post('/kategori/store', [App\Http\Controllers\KategoriController::class, 'store']);
-            Route::post('/kategori/update', [App\Http\Controllers\KategoriController::class, 'update']);
-            Route::post('/kategori/destroy', [App\Http\Controllers\KategoriController::class, 'destroy']);
+            Route::put('/kategori/update/{id}', [App\Http\Controllers\KategoriController::class, 'update']);
+            Route::delete('/kategori/destroy/{id}', [App\Http\Controllers\KategoriController::class, 'destroy']);
         });
 
         Route::middleware(['role:lurah'])->group(function () {

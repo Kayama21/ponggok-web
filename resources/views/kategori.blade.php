@@ -33,7 +33,7 @@
                         <table id="tableCategories" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th style="width:70%">Document Name</th>
+                                    <th style="width:70%">Document Kategori</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -42,8 +42,15 @@
                                 <tr>
                                     <td>{{ $k->kategoriSurat }}</td>
                                     <td>
-                                        <a href="/kategori/page-update" type="button" class="btn btn-secondary" style="margin-right: 10px;">Update</a>
-                                        <a href="/kategori/destroy" type="button" class="btn btn-danger">Delete</a>
+                                        <a href="/kategori/page-update/{{$k->id}}" type="button" class="btn btn-secondary" style="margin-right: 10px;">Update</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ url('/kategori/destroy/'.$k->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"
+                                        >Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
