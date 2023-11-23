@@ -117,7 +117,7 @@
             <li class="nav-header">DOCUMENTS</li>
             <li class="nav-item">
               <a href="/ajuan" class="nav-link">
-                <ion-icon name="mail-unread"></ion-icon>
+                <ion-icon name="list"></ion-icon>
                 <p>
                   List Ajuan
                 </p>
@@ -134,6 +134,15 @@
               </a>
             </li>
             @endif
+            <!-- Riwayat Ajuan -->
+            <!-- <li class="nav-item">
+              <a href="/riwayat" class="nav-link">
+                <ion-icon name="mail-unread"></ion-icon>
+                <p>
+                  Riwayat Ajuan
+                </p>
+              </a>
+            </li> -->
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

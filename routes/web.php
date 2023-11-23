@@ -28,9 +28,13 @@ Route::middleware(['auth'])
         Route::get('/ajuan', [App\Http\Controllers\SuratController::class, 'listAjuan']);
         Route::get('/ajuan-table', [App\Http\Controllers\SuratController::class, 'tableAjuan']);
 
+        Route::get('/riwayat', [App\Http\Controllers\SuratController::class, 'riwayat']);
+
         Route::middleware(['role:admin'])->group(function () {
             Route::get('/ajuan/verifikasi/{id}', [App\Http\Controllers\SuratController::class, 'verifikasi']);
             Route::post('/ajuan/verified-ajuan', [App\Http\Controllers\SuratController::class, 'verifiedAjuan']);
+            Route::get('/ajuan/kirim-email/{id}', [App\Http\Controllers\SuratController::class, 'sendEmail']);
+
             Route::get('/kategori', [App\Http\Controllers\KategoriController::class, 'index']);
             Route::get('/kategori/page-add', [App\Http\Controllers\KategoriController::class, 'addKategori']);
             Route::get('/kategori/page-update', [App\Http\Controllers\KategoriController::class, 'updateKategori']);
@@ -42,17 +46,8 @@ Route::middleware(['auth'])
         Route::middleware(['role:lurah'])->group(function () {
             Route::get('/ajuan/signature/{id}', [App\Http\Controllers\SuratController::class, 'signaturePage']);
             Route::post('/ajuan/signed-ajuan', [App\Http\Controllers\SuratController::class, 'signedAjuan']);
+            Route::get('/show-pdf/{id}', [App\Http\Controllers\SuratController::class, 'showSignedPDF']);
         });
 
         Route::get('/cpanel/logout', [App\Http\Controllers\LoginController::class, 'logout']);
     });
-
-
-Route::get('/requests-lurah', [App\Http\Controllers\SuratController::class, 'list_ajuan_ttd']);
-Route::get('/requests-table-lurah', [App\Http\Controllers\SuratController::class, 'tableRequestsLurah']);
-
-
-
-
-
-

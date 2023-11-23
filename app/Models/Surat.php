@@ -9,6 +9,6 @@ class Surat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['namaPengaju', 'nik', 'detailAjuan', 'ktpPic', 'kategoriSurat', 'statusSurat', 'wa', 'email'];
+    protected $fillable = ['namaPengaju', 'nik', 'detailAjuan', 'ktpPic', 'kategoriSurat', 'pdfDokumen', 'statusSurat', 'wa', 'email'];
 
 }

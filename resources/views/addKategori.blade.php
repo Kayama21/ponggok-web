@@ -29,7 +29,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form method="POST" action="/kategori/store" enctype="multipart/form-data">
+        <form method="POST" action="/kategori/gstore" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group">

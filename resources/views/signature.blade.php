@@ -66,16 +66,10 @@
         <div class="card-body">
             <div class="surat-wrapper">
                 <header>
-                    <div class="row">
-                        <div id="img" class="col-md-3">
-                            <img id="logo" src="{{asset('assets/img/PonggokLogo.png')}}" width="200px" />
-                        </div>
-                        <div class="col-md-6" style="text-align: center;">
-                            <p style="font-size: 40px;"><strong>PEMERINTAH KOTA BLITAR<strong></p>
-                            <p style="font-size: 30px;"><strong>KECAMATAN PONGGOK</strong></p>
-                            <p>Jl. Soekarno-Hatta, No. 68, Telepon/Faximile (0298) 523024</p>
-                            <p style="font-size: 30px;"><strong>PONGGOK 50552</strong></p>
-                        </div>
+                    <div style="text-align: center; margin: auto;">
+                        <p style="font-size: 40px;"><strong>PEMERINTAH KOTA BLITAR<strong></p>
+                        <p style="font-size: 30px;">KECAMATAN PONGGOK</p>
+                        <p>Jl. Soekarno-Hatta, No. 68, Telepon/Faximile (0298) 523024</p>
                     </div>
                 </header>
 
@@ -98,34 +92,53 @@
                     <div id="pembuka" class="row">&emsp; &emsp; &emsp; Menindak lanjuti surat dari Sekretariat Daerah Kabupaten Semarang Nomor : 005/001819/2018 perihal Peraturan Baru mengenai Badan Permusyawaratan Desa (BPD) berdasarkan Perda Nomor 4 Tahun 2018 dan Perbup Nomor 21 Tahun 2018 serta Tahapan Pengisian Anggota BPD, bersama ini kami mengharap atas kehadiran saudara besok pada :</div>
                     <div id="tempat-tgl">
                         <table>
-                            <tr>
-                                <td>Hari</td>
-                                <td>:</td>
-                                <td>Kamis</td>
-                            </tr>
-                            <tr>
-                                <td>Tanggal</td>
-                                <td>:</td>
-                                <td>28 Juni 2018</td>
-                            </tr>
-                            <tr>
-                                <td>Jam</td>
-                                <td>:</td>
-                                <td>08.00 WIB</td>
-                            </tr>
-                            <tr>
-                                <td>Tempat</td>
-                                <td>:</td>
-                                <td>Aula PP PAUD dan Dikmas Jawa Tengah Jl. Diponegoro No 250 Ungaran</td>
-                            </tr>
-                            <tr>
-                                <td>Catatan</td>
-                                <td>:</td>
-                                <td>-</td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>Nama</td>
+                                    <td>:</td>
+                                    <td>{{ auth()->user()->name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>NIP</td>
+                                    <td>:</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Jabatan</td>
+                                    <td>:</td>
+                                    <td>Lurah I</td>
+                                </tr>
+                                <tr>
+                                    <td>Instansi</td>
+                                    <td>:</td>
+                                    <td>Kecamatan Ponggok</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
-                    <div id="penutup">Demikian untuk menjadikan perhatian dan atas kehadirannya diucapkan terimakasih.</div>
+                    <div>Dengan keputusan surat ini, menyetujui pengajuan dokumen {{ $signature->kategoriSurat }} oleh :</div>
+                    <div id="tempat-tgl">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Nama</td>
+                                    <td>:</td>
+                                    <td>{{ $signature->namaPengaju }}</td>
+                                </tr>
+                                <tr>
+                                    <td>NIK</td>
+                                    <td>:</td>
+                                    <td>{{ $signature->nik }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pekerjaan</td>
+                                    <td>:</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="penutup">Dengan ini surat ini dibuat untuk digunakan sebagaimana mestinya.</div>
                     <div id="ttd" class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-4"></div>
@@ -143,7 +156,8 @@
             @csrf
             <input type="hidden" name="id_ajuan" class="form-control" value="{{ $signature->id }}" readonly>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Setujui Tanda Tangan</button>
+                <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Setujui Tanda Tangan</button>
+                <a href="/show-pdf/{{ $signature->id }}" class="btn btn-secondary">Lihat Bentuk PDF</a>
             </div>
         </form>
     </div>
