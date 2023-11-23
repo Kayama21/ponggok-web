@@ -44,9 +44,9 @@
                     Pilih jenis dokumen yang diajukan
                 </label>
                 <select class="formbold-form-input" name="kategoriSurat">
-                    <option selected disabled hidden value="">Silahkan pilih tipe dokumen</option>
-                    @foreach($categories as $c)
-                    <option value="{{$c->kategoriSurat}}">{{$c->kategoriSurat}}</option>
+                    <option selected disabled hidden >Silahkan pilih tipe dokumen</option>
+                    @foreach($kategoris as $k)
+                    <option value="{{$k->kategoriSurat}}">{{$k->kategoriSurat}}</option>
                     @endforeach
                 </select>
             </div>

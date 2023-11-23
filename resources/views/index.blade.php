@@ -134,15 +134,6 @@
               </a>
             </li>
             @endif
-            <!-- Riwayat Ajuan -->
-            <!-- <li class="nav-item">
-              <a href="/riwayat" class="nav-link">
-                <ion-icon name="mail-unread"></ion-icon>
-                <p>
-                  Riwayat Ajuan
-                </p>
-              </a>
-            </li> -->
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
